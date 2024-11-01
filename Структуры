@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Характеристики доски
 #define BOARD_WIDTH 8
 #define BOARD_HEIGHT 8
 #define MAX_COMBINATION_LENGTH 5
@@ -13,13 +14,13 @@ typedef struct {
     CellType type;
     int occupied; // 0 - пустая, 1 - занятая
     int x, y;
-} Cell;
+} Cell; // Характеристики клетки
 
 typedef struct {
     int width;
     int height;
     Cell board[BOARD_HEIGHT][BOARD_WIDTH];
-} GameBoard;
+} GameBoard; // Доска из массива клеток
 
 typedef struct {
     char name[50];
@@ -30,12 +31,12 @@ typedef struct {
 typedef struct {
     GameBoard gameBoard;
     Player player;
-    int gameStatus; // 0 - идет, 1 - закончена
+    int gameStatus; // 0 - идет, 1 - окончена
 } Game;
 
 typedef struct {
     Cell cells[MAX_COMBINATION_LENGTH];
-    int length;
+    int length; // Длинна комбинации
     int type; // 0 - горизонтальная, 1 - вертикальная, 2 - диагональная
 } Combination;
 
