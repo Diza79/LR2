@@ -1,0 +1,70 @@
+void initializeGameBoard(GameBoard *board) {
+    board->width = BOARD_WIDTH;
+    board->height = BOARD_HEIGHT;
+    for (int i = 0; i < BOARD_HEIGHT; i++) {
+        for (int j = 0; j < BOARD_WIDTH; j++) {
+            board->board[i][j].type = EMPTY;
+            board->board[i][j].occupied = 0;
+            board->board[i][j].x = j;
+            board->board[i][j].y = i;
+        }
+    }
+}
+
+void initializePlayer(Player *player, const char *name) {
+    strcpy(player->name, name);
+    player->score = 0;
+    player->level = 1;
+}
+
+void printGameBoard(const GameBoard *board) {
+    for (int i = 0; i < board->height; i++) {
+        for (int j = 0; j < board->width; j++) {
+            if (board->board[i][j].occupied) {
+                printf("%d ", board->board[i][j].type);
+            } else {
+                printf(". ");
+            }
+        }
+        printf("\n");
+    }
+}
+
+void switchPlayer(Game *game) {
+    // В одиночной игре переключение игрока не требуется, но можно использовать для логики уровня
+}
+
+int checkCombination(GameBoard *board, Combination *combination) {
+    // Проверка на наличие комбинации в игровом поле
+    // Возвращает 1, если есть комбинация, иначе 0
+    return 0; // Заглушка
+}
+
+void updateScore(ScoreCounter *scoreCounter, int points) {
+    scoreCounter->currentScore += points;
+    scoreCounter->totalScore += points;
+}
+
+void initializeGame(Game *game, const char *playerName) {
+    initializeGameBoard(&game->gameBoard);
+    initializePlayer(&game->player, playerName);
+    game->gameStatus = 0; // Игра идет
+}
+
+int main() {
+    Game game;
+    GameSettings settings = {MAX_LEVELS, BOARD_WIDTH, BOARD_HEIGHT, 1};
+    ScoreCounter scoreCounter = {0, 0};
+
+    // Инициализация игры
+    initializeGame(&game, "Игрок 1");
+
+    // Демонстрация работы с игровым полем
+    printGameBoard(&game.gameBoard);
+
+    // Пример обновления счета
+    updateScore(&scoreCounter, 10);
+    printf("Текущий счет: %d\n", scoreCounter.currentScore);
+
+    return 0;
+}
