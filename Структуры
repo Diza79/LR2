@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define BOARD_WIDTH 8
+#define BOARD_HEIGHT 8
+#define MAX_COMBINATION_LENGTH 5
+#define MAX_LEVELS 10
+
+typedef enum { EMPTY, RED, BLUE, GREEN } CellType;
+
+typedef struct {
+    CellType type;
+    int occupied; // 0 - пустая, 1 - занятая
+    int x, y;
+} Cell;
+
+typedef struct {
+    int width;
+    int height;
+    Cell board[BOARD_HEIGHT][BOARD_WIDTH];
+} GameBoard;
+
+typedef struct {
+    char name[50];
+    int score;
+    int level;
+} Player;
+
+typedef struct {
+    GameBoard gameBoard;
+    Player player;
+    int gameStatus; // 0 - идет, 1 - закончена
+} Game;
+
+typedef struct {
+    Cell cells[MAX_COMBINATION_LENGTH];
+    int length;
+    int type; // 0 - горизонтальная, 1 - вертикальная, 2 - диагональная
+} Combination;
+
+typedef struct {
+    int totalScore;
+    int currentScore;
+} ScoreCounter;
+
+typedef struct {
+    int maxLevels;
+    int boardWidth;
+    int boardHeight;
+    int difficultyLevel;
+} GameSettings;
