@@ -1,0 +1,30 @@
+int main() {
+    Game game;
+    initializeGame(&game);
+
+    // Пример заполнения игрового поля
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            game.board.board[i][j].type = 'A' + (rand() % 3); // Заполнение случайными типами
+        }
+    }
+
+    displayBoard(&game.board);
+
+    // Пример движения
+    Move move = {{0, 0}, {0, 1}};
+    makeMove(&game, move);
+    
+    printf("После движения:\n");
+    displayBoard(&game.board);
+
+    // Проверка на победу
+    if (checkWin(&game)) {
+        printf("Поздравляем, вы выиграли!\n");
+    } else {
+        printf("Игра продолжается.\n");
+    }
+
+    return 0;
+}
+
