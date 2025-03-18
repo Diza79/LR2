@@ -1,53 +1,42 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-// Характеристики доски
-#define BOARD_WIDTH 8
-#define BOARD_HEIGHT 8
-#define MAX_COMBINATION_LENGTH 5
-#define MAX_LEVELS 10
-
-typedef enum { EMPTY, RED, BLUE, GREEN } CellType;
+typedef struct {
+    int x; // Координата по оси X
+    int y; // Координата по оси Y
+} Cell;
 
 typedef struct {
-    CellType type;
-    int occupied; // 0 - пустая, 1 - занятая
-    int x, y;
-} Cell; // Характеристики клетки
+    Cell position; // Позиция клетки
+    char type; // Тип игрового объекта (например, 'A', 'B', 'C')
+} GameObject;
 
 typedef struct {
-    int width;
-    int height;
-    Cell board[BOARD_HEIGHT][BOARD_WIDTH];
-} GameBoard; // Доска из массива клеток
+    GameObject board[10][10]; // Игровое поле 10x10
+} GameBoard;
 
 typedef struct {
-    char name[50];
-    int score;
-    int level;
+    char name[50]; // Имя игрока
+    int score; // Счет игрока
 } Player;
 
 typedef struct {
-    GameBoard gameBoard;
-    Player player;
-    int gameStatus; // 0 - идет, 1 - окончена
-} Game;
+    int currentScore; // Текущий счет
+    int highScore; // Высший счет
+} Score;
 
 typedef struct {
-    Cell cells[MAX_COMBINATION_LENGTH];
-    int length; // Длинна комбинации
-    int type; // 0 - горизонтальная, 1 - вертикальная, 2 - диагональная
-} Combination;
-
-typedef struct {
-    int totalScore;
-    int currentScore;
-} ScoreCounter;
-
-typedef struct {
-    int maxLevels;
-    int boardWidth;
-    int boardHeight;
-    int difficultyLevel;
+    int width; // Ширина поля
+    int height; // Высота поля
+    int winCondition; // Количество объектов для победы
 } GameSettings;
+
+typedef struct {
+    Cell from; // Начальная позиция
+    Cell to; // Конечная позиция
+} Move;
+
+typedef struct {
+    GameBoard board; // Игровое поле
+    Player player; // Игрок
+    Score score; // Счет
+    GameSettings settings; // Настройки игры
+    int isGameOver; // Флаг окончания игры
+} Game;
